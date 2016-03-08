@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('site_title')%> | <%= t('site_name')%></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<h1>Project New</h1>
+  <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
+|
+  <%= link_to_unless I18n.locale == :es, "Español", locale: :es %>
+
+
+<%= yield %>
+
+
+<% if user_signed_in? %>
+  <p>Signed in as <%= current_user.email %></p>
+  <p><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></p>
+
+  <% else %>
+  <p>
+  <%= link_to('Login', new_user_session_path)  %>  
+  </p>
+<% end %>
+<p>© <%= Time.now.year %> Francisco Javier Jiménez. Todos los derechos reservados. <%= t :hello %></p>
+
+</body>
+</html>
